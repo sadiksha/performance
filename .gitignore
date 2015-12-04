@@ -16,4 +16,5 @@
 *.swp
 
 Gemfile.lock
-
+db/schema.rb
+*.gem
