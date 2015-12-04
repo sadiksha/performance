@@ -18,4 +18,12 @@ feature "Product" do
     expect(product.description).to eq("This is a new product")
     expect(product.price).to eq(12.33)
   end
+
+  scenario "can be viewed in the index page" do
+    create(:product)
+    visit products_path
+    expect(page).to have_content("Product")
+    expect(page).to have_content("This is my precious")
+    expect(page).to have_content("9.99")
+  end
 end
