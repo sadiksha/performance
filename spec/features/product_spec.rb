@@ -26,4 +26,22 @@ feature "Product" do
     expect(page).to have_content("This is my precious")
     expect(page).to have_content("9.99")
   end
+
+  scenario "can edit products" do
+    create(:product)
+    visit products_path
+
+    click_link "Edit"
+
+    expect(page).to have_field("Name", with: "Product")
+    expect(page).to have_field("Description", with: "This is my precious")
+    expect(page).to have_field("Price", with: "9.99")
+
+    fill_in "Name", with: "New name"
+    click_button "Update Product"
+
+    product = Product.first
+    expect(product.name).to eq("New name")
+    expect(page).to have_content("New name")
+  end
 end
