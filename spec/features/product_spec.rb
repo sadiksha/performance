@@ -27,7 +27,7 @@ feature "Product" do
     expect(page).to have_content("9.99")
   end
 
-  scenario "can edit products" do
+  scenario "can be edited" do
     create(:product)
     visit products_path
 
@@ -43,5 +43,15 @@ feature "Product" do
     product = Product.first
     expect(product.name).to eq("New name")
     expect(page).to have_content("New name")
+  end
+
+  scenario "can be destroyed", js: true do
+    create(:product)
+    visit products_path
+
+    click_link "Delete"
+    page.driver.browser.switch_to.alert.accept
+    sleep 1
+    expect(Product.all.count).to eq(0)
   end
 end
