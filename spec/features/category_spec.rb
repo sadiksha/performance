@@ -20,4 +20,18 @@ feature "Category" do
     category = Category.first
     expect(category.name).to eq("New Category")
   end
+
+  scenario "can be edited" do
+    create(:category)
+    visit categories_path
+    click_link "Edit"
+
+    fill_in "Name", with: "Edited Category"
+    click_button "Update Category"
+
+    category = Category.first
+    expect(category.name).to eq("Edited Category")
+
+    expect(page).to have_content("Edited Category")
+  end
 end
