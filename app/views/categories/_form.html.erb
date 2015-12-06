@@ -1,5 +1,6 @@
 <%= form_for @category, :html => { :class => 'form-horizontal' } do |f| %>
 
+  <%= render "partials/error_messages", {model: @category} %>
   <div class="form-group">
     <%= f.label :name, "Name" %>
     <%= f.text_field :name %>

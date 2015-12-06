@@ -45,4 +45,10 @@ feature "Category" do
     sleep 1
     expect(Category.count).to eq(0)
   end
+
+  scenario "cannot be created with empty name" do
+    visit new_category_path
+    click_button "Create Category"
+    expect(page).to have_content("Name can't be blank")
+  end
 end

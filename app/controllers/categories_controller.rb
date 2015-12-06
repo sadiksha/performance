@@ -11,6 +11,8 @@ class CategoriesController < ApplicationController
     @category = Category.new(params[:category])
     if @category.save
       redirect_to categories_path
+    else
+      render "new"
     end
   end
 
@@ -22,6 +24,8 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     if @category.update_attributes(params[:category])
       redirect_to categories_path
+    else
+      render "edit"
     end
   end
 
