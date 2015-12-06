@@ -34,4 +34,15 @@ feature "Category" do
 
     expect(page).to have_content("Edited Category")
   end
+
+  scenario "can be destroyed", js: true do
+    create(:category)
+    visit categories_path
+    click_link "Delete"
+
+    page.driver.browser.switch_to.alert.accept
+
+    sleep 1
+    expect(Category.count).to eq(0)
+  end
 end
