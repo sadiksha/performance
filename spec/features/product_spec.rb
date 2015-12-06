@@ -54,4 +54,12 @@ feature "Product" do
     sleep 1
     expect(Product.all.count).to eq(0)
   end
+
+  scenario "gives error on empty price and name when creating new product" do
+    visit new_product_path
+
+    click_button "Create Product"
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Price can't be blank")
+  end
 end
