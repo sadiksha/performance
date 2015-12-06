@@ -1,6 +1,8 @@
 require "spec_helper"
 
 describe Product, "status", type: :model do
+  it { Product.reflect_on_association(:category).macro.should  eq(:belongs_to) }
+
   it "has attributes name, description and price" do
     product = Product.new(name: "product", description: "This is a product", price: 12.33)
     expect(product).to have_attributes(name: "product")
