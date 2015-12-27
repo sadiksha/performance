@@ -9,6 +9,8 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(params[:product])
+    category = Category.find(params[:product][:category_id])
+    @product.category = category
     if @product.save
       redirect_to products_path
     else
